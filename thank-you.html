@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You — VIRAAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --viraal-orange: #FF6B35;
+            --dark: #0D0D0D;
+            --gray-100: #F5F5F5;
+            --success: #22C55E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gray-100);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* ── Header ── */
+        .site-header {
+            width: 100%;
+            background: white;
+            border-bottom: 1px solid #E8E8E8;
+            padding: 0 40px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-shrink: 0;
+        }
+        .site-header .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--dark);
+            text-decoration: none;
+        }
+        .site-header .logo span { color: var(--viraal-orange); }
+        .site-header .back-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color .2s;
+        }
+        .site-header .back-link:hover { color: var(--viraal-orange); }
+        .page-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        /* ── Loading overlay ── */
+        #loadingOverlay {
+            position: fixed;
+            inset: 0;
+            background: var(--gray-100);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            gap: 20px;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #ddd;
+            border-top-color: var(--viraal-orange);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #loadingOverlay p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* ── Main card ── */
+        .container {
+            background: white;
+            padding: 60px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            display: none; /* zobrazí se až po ověření platby */
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            margin: 0 auto 30px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .order-info {
+            background: var(--gray-100);
+            padding: 20px;
+            margin: 24px 0;
+            text-align: left;
+        }
+
+        .order-info h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-row:last-child {
+            border-bottom: none;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            transition: all .3s;
+        }
+
+        .download-btn:hover {
+            background: var(--viraal-orange);
+        }
+
+        .email-note {
+            margin-top: 24px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .email-note a {
+            color: var(--viraal-orange);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <a href="index.html" class="logo">VI<span>R</span>AAL</a>
+        <a href="index.html" class="back-link">← Back to Store</a>
+    </header>
+
+    <div class="page-body">
+
+    <!-- Zobrazuje se dokud se ověřuje platba -->
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Ověřujeme platbu&hellip;</p>
+    </div>
+
+    <!-- Zobrazí se až po úspěšném ověření -->
+    <div class="container" id="mainCard">
+        <div class="success-icon">✓</div>
+        <h1>Thank You!</h1>
+        <p>Your payment was successful. The VIRAAL Blueprint is ready for download.</p>
+
+        <div class="order-info">
+            <h3>Order Details</h3>
+            <div class="order-row">
+                <span>Product</span>
+                <span>The VIRAAL Blueprint</span>
+            </div>
+            <div class="order-row">
+                <span>Amount</span>
+                <span>$49.00</span>
+            </div>
+            <div class="order-row">
+                <span>Status</span>
+                <span style="color: var(--success); font-weight: 600;">✓ Paid</span>
+            </div>
+        </div>
+
+        <a href="https://drive.google.com/file/d/1PvIZhjDauGA--_sMpg__sCXFXz0ajaGG/view?usp=sharing"
+            class="download-btn" target="_blank" rel="noopener noreferrer">
+            Download Your Blueprint
+        </a>
+
+        <p class="email-note">
+            We also sent a download link to <strong id="successEmail">your email</strong>.<br>
+            Questions? Contact <a href="mailto:viraal-shop@protonmail.com">viraal-shop@protonmail.com</a>
+        </p>
+    </div>
+
+    </div><!-- end page-body -->
+
+    <script>
+        // ── Nastav URL svého serveru (stejnou jako v .env → DOMAIN) ──────────────
+        // Při deploymentu změň na https://tvuj-server.com
+        const API_URL = '/api';
+        // ──────────────────────────────────────────────────────────────────────────
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+
+            // Pokud chybí session_id — přesměruj pryč (ochrana přímého přístupu)
+            if (!sessionId) {
+                window.location.replace('index.html');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/verify-session?session_id=${encodeURIComponent(sessionId)}`);
+
+                if (!response.ok) {
+                    throw new Error(`Server vrátil ${response.status}`);
+                }
+
+                const session = await response.json();
+
+                // Platba neproběhla → cancel stránka
+                if (session.payment_status !== 'paid') {
+                    window.location.replace('cancel.html');
+                    return;
+                }
+
+                // ✅ Platba OK — zobraz stránku
+                const emailEl = document.getElementById('successEmail');
+                if (emailEl && session.customer_email) {
+                    emailEl.textContent = session.customer_email;
+                }
+
+                document.getElementById('loadingOverlay').style.display = 'none';
+                document.getElementById('mainCard').style.display = 'block';
+
+            } catch (err) {
+                console.error('Chyba ověření:', err);
+                // Při jakékoli chybě přesměruj pryč — bezpečnost na prvním místě
+                window.location.replace('cancel.html');
+            }
+        });
+    </script>
+</body>
+
+</html>
